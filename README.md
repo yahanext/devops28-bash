@@ -91,7 +91,23 @@ done
 ### Ваш скрипт:
 
 ```bash
-???
+
+array=("192.168.0.1" "173.194.222.113" "87.250.250.242")
+test_count=5
+host_port=80
+for remote_addr in ${array[*]}
+    do
+    for ((i=1; i<=test_count; i++))
+        do
+	curl -m 2 $remote_addr$":"$host_port 
+	if (($? == 0))
+	then
+	echo $(date)" remote host "$remote_addr" up" >> curll.log
+	else
+	echo $(date)" remote host "$remote_addr" down" >> curll.log
+	fi
+    done
+done
 ```
 
 ---
@@ -102,7 +118,24 @@ done
 ### Ваш скрипт:
 
 ```bash
-???
+array=("192.168.0.1" "173.194.222.113" "87.250.250.242")
+test_count=5
+host_port=80
+for remote_addr in ${array[*]}
+	do
+	for ((i=1; i<=test_count; i++))
+		do
+		curl -m 2 $remote_addr$":"$host_port 
+		if (($? == 0))
+		then
+		echo $(date)" remote host "$remote_addr" up" >> curll.log
+		else
+	    	echo $(date)" remote host "$remote_addr" down" >> error.log
+        	exit
+		fi
+	done
+done
+
 ```
 
 ---
